@@ -1,27 +1,31 @@
-//your JS code here. If required.
-
-const square = document.querySelectorAll('.square');
-
-square.forEach((sq) => {
-    sq.addEventListener("mouseenter", () => {
-        changedHoveredColor(sq);
-    })
-
-    sq.addEventListener("mouseleave", restcolor);
-})
-
- function changedHoveredColor(hoveredSquare) {
-    const square = document.querySelectorAll('.square');
-    square.forEach((sq) => {
-        if(hoveredSquare !== sq){
-            sq.style.backgroundColor = '#6F4E37';
+function changeColors(exceptId, color) {
+    // Get all squares
+    var squares = document.getElementsByClassName('square');
+    
+    // Loop through all squares
+    for (var i = 0; i < squares.length; i++) {
+        // Change color of squares except the one with id equal to exceptId
+        if (squares[i].id !== exceptId) {
+            squares[i].style.backgroundColor = color;
         }
-    })
- }
+    }
+}
 
- function restcolor(){
-     const square = document.querySelectorAll('.square');
-    square.forEach((sq) => {
-        sq.style.backgroundColor = '#E6E6FA';
-    })
- }
+// Function to handle mouseover event
+function handleMouseOver(event) {
+    // Change color of other squares to Coffee
+    changeColors(event.target.id, '#6F4E37');
+}
+
+// Function to handle mouseout event
+function handleMouseOut(event) {
+    // Change color of other squares back to Lavender
+    changeColors(event.target.id, '#E6E6FA');
+}
+
+// Attach event listeners to each square
+var squares = document.getElementsByClassName('square');
+for (var i = 0; i < squares.length; i++) {
+    squares[i].addEventListener('mouseover', handleMouseOver);
+    squares[i].addEventListener('mouseout', handleMouseOut);
+}
